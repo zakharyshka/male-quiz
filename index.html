@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Men's Assessment</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Upgrade Assessment</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-   * {
+<style>
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -16,8 +16,8 @@
 }
 
 body {
-  background: #0f1115;
-  color: #ffffff;
+  background: #0c0f14;
+  color: white;
   display: flex;
   justify-content: center;
 }
@@ -41,15 +41,16 @@ body {
 
 .progress {
   height: 6px;
-  background: #1f232b;
+  background: #1a1f27;
   border-radius: 10px;
-  margin-bottom: 30px;
   overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #4f8cff, #00d4ff);
+  background: linear-gradient(90deg,#4f8cff,#00d4ff);
+  transition: 0.3s ease;
 }
 
 .content {
@@ -64,33 +65,21 @@ body {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 26px;
   margin-bottom: 15px;
+  font-weight: 800;
 }
 
 h2 {
   font-size: 22px;
   margin-bottom: 25px;
+  font-weight: 700;
 }
 
-.subtitle {
-  font-size: 16px;
-  color: #b0b3b8;
-  margin-bottom: 25px;
-}
-
-.highlight-box {
-  background: #1a1d24;
-  padding: 16px;
-  border-radius: 14px;
-  margin-bottom: 30px;
-  text-align: left;
-  font-size: 14px;
-  color: #c5c7cc;
-}
-
-.highlight-box p {
-  margin-bottom: 6px;
+p {
+  color: #aab0bb;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .options {
@@ -101,13 +90,12 @@ h2 {
 }
 
 .option {
-  background: #1a1d24;
+  background: #151922;
   padding: 16px;
   border-radius: 14px;
-  font-size: 16px;
+  border: 1px solid transparent;
   cursor: pointer;
   transition: 0.2s ease;
-  border: 1px solid transparent;
 }
 
 .option:hover {
@@ -116,113 +104,207 @@ h2 {
 
 .option.selected {
   border-color: #4f8cff;
-  background: #1e2633;
+  background: #1b2431;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #4f8cff, #00d4ff);
+.btn {
+  background: linear-gradient(90deg,#4f8cff,#00d4ff);
   border: none;
   padding: 16px;
   border-radius: 14px;
-  font-size: 16px;
   font-weight: 600;
+  font-size: 16px;
   color: white;
   cursor: pointer;
-  transition: 0.2s ease;
+  margin-top: 10px;
 }
 
-.btn-primary:active {
+.btn:active {
   transform: scale(0.98);
 }
 
-.btn-primary.disabled {
-  opacity: 0.4;
-  pointer-events: none;
+.small {
+  font-size: 13px;
+  color: #6f7683;
+  text-align: center;
+  margin-top: 10px;
 }
-  </style>
+
+.card {
+  background: #151922;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+.plan {
+  border: 1px solid #2a313d;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+.plan.best {
+  border: 2px solid #4f8cff;
+  background: #192233;
+}
+
+.badge {
+  font-size: 12px;
+  background: #4f8cff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.loader {
+  border: 4px solid #1a1f27;
+  border-top: 4px solid #4f8cff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 30px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="app">
+<div class="app" id="app"></div>
 
-  <!-- Screen 1: Warm-up -->
-  <div class="screen active" id="screen-1">
-    <div class="progress">
-      <div class="progress-bar" style="width: 10%"></div>
-    </div>
+<script>
+const screens = [
 
-    <div class="content center">
-      <h1>Upgrade Yourself</h1>
-      <p class="subtitle">
-        This short assessment will analyze your habits, discipline,
-        and lifestyle to build a personalized improvement plan.
-      </p>
+{type:"text",title:"Upgrade Yourself",text:"This short assessment will evaluate your discipline, physical energy, focus, and drive."},
 
-      <div class="highlight-box">
-        <p>⚡ Takes less than 2 minutes</p>
-        <p>📊 Personalized insights</p>
-        <p>🔒 100% private</p>
-      </div>
+{type:"text",title:"Most men never reach their full potential.",text:"Not because they lack talent — but because they lack structure."},
 
-      <button class="btn-primary" onclick="nextScreen(2)">
-        Start Assessment
-      </button>
-    </div>
-  </div>
+{type:"question",title:"How would you describe your current physical shape?",options:["Strong & athletic","Average, could improve","Low energy & inconsistent"]},
 
+{type:"question",title:"How often do you train per week?",options:["4+ times","1–3 times","Rarely"]},
 
-  <!-- Screen 2: Question -->
-  <div class="screen" id="screen-2">
-    <div class="progress">
-      <div class="progress-bar" style="width: 25%"></div>
-    </div>
+{type:"text",title:"Structured men win.",text:"Consistency multiplies results."},
 
-    <div class="content">
-      <h2>How would you describe your current physical shape?</h2>
+{type:"question",title:"How would you rate your daily focus?",options:["Extremely focused","Distracted sometimes","Struggle to concentrate"]},
 
-      <div class="options">
-        <div class="option" onclick="selectOption(this)">
-          💪 Strong & athletic
-        </div>
+{type:"question",title:"How confident are you socially?",options:["Very confident","Depends on context","Often insecure"]},
 
-        <div class="option" onclick="selectOption(this)">
-          ⚖️ Average, could improve
-        </div>
+{type:"text",title:"You're doing better than 73% of men.",text:"Let's go deeper."},
 
-        <div class="option" onclick="selectOption(this)">
-          💤 Low energy & inconsistent
-        </div>
-      </div>
+{type:"question",title:"How consistent is your sleep schedule?",options:["Strict routine","Inconsistent","Random"]},
 
-      <button class="btn-primary disabled" id="continueBtn" onclick="nextScreen(1)">
-        Continue
-      </button>
-    </div>
-  </div>
+{type:"question",title:"Do you follow a nutrition strategy?",options:["Structured plan","Try to eat healthy","No system"]},
 
+{type:"text",title:"Elite men focus on 3 pillars.",text:"Strength. Focus. Discipline."},
+
+{type:"question",title:"How often do you procrastinate?",options:["Rarely","Sometimes","Frequently"]},
+
+{type:"question",title:"How satisfied are you with your income?",options:["Fully satisfied","Improving","Frustrated"]},
+
+{type:"loading"},
+
+{type:"text",title:"Your results are ready.",text:"Here's what we discovered."},
+
+{type:"text",title:"High potential detected.",text:"But inconsistent structure slows progress."},
+
+{type:"text",title:"We built a system for you.",text:"Improve strength, focus, and confidence."},
+
+{type:"text",title:"In 30 days you may notice:",text:"• Higher energy\n• Sharper focus\n• Stronger discipline"},
+
+{type:"text",title:"48,000+ men upgraded already.",text:"Consistency changes everything."},
+
+{type:"paywall"}
+
+];
+
+let current = 0;
+
+function render(){
+const app = document.getElementById("app");
+const progress = Math.min((current/(screens.length-1))*100,100);
+
+app.innerHTML = `
+<div class="screen active">
+<div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+<div class="content">
+${renderContent(screens[current])}
+</div>
+</div>`;
+}
+
+function renderContent(screen){
+if(screen.type==="text"){
+return `<div>
+<h1>${screen.title}</h1>
+<p>${screen.text.replace(/\n/g,"<br>")}</p>
+<button class="btn" onclick="next()">Continue</button>
+</div>`;
+}
+
+if(screen.type==="question"){
+return `<div>
+<h2>${screen.title}</h2>
+<div class="options">
+${screen.options.map(o=>`<div class="option" onclick="select(this)">${o}</div>`).join("")}
+</div>
+<button class="btn" onclick="next()">Continue</button>
+</div>`;
+}
+
+if(screen.type==="loading"){
+setTimeout(()=>next(),2000);
+return `<div class="center">
+<h1>Analyzing your discipline profile...</h1>
+<div class="loader"></div>
+</div>`;
+}
+
+if(screen.type==="paywall"){
+return `
+<h1>Choose Your Upgrade Plan</h1>
+
+<div class="plan">
+<h3>Monthly</h3>
+<p>$19.99 / month</p>
 </div>
 
-  <script>
-    function nextScreen(id) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
+<div class="plan best">
+<div class="badge">Best Value</div>
+<h3>3 Months</h3>
+<p>$39.99</p>
+</div>
 
-  document.getElementById("screen-" + id).classList.add("active");
+<div class="plan">
+<h3>Annual</h3>
+<p>$79.99</p>
+</div>
+
+<button class="btn">Unlock My Plan</button>
+<p class="small">Auto-renews. Cancel anytime.</p>
+`;
+}
 }
 
-function selectOption(element) {
-  document.querySelectorAll(".option").forEach(opt => {
-    opt.classList.remove("selected");
-  });
-
-  element.classList.add("selected");
-
-  const btn = document.getElementById("continueBtn");
-  btn.classList.remove("disabled");
+function next(){
+if(current < screens.length-1){
+current++;
+render();
+}
 }
 
-  </script>
+function select(el){
+document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
+el.classList.add("selected");
+}
+
+render();
+</script>
 
 </body>
 </html>
