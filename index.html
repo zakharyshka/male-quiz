@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+/* ===== BASE ===== */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,25 +29,53 @@ body {
   width: 100%;
   max-width: 390px;
   min-height: 100vh;
-  padding: 20px;
+  padding: 16px; /* кратно 4 */
 }
+
+/* ===== SCREEN ===== */
 
 .screen {
-  display: none;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 16px;
 }
 
-.screen.active {
-  display: flex;
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
 }
+
+.inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ===== LOGO ===== */
+
+.logo {
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+/* ===== PROGRESS ===== */
 
 .progress {
-  height: 6px;
-  background: #1a1f27;
-  border-radius: 10px;
+  height: 4px;
+  background: #1c212b;
+  border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .progress-bar {
@@ -53,6 +84,8 @@ body {
   transition: 0.3s ease;
 }
 
+/* ===== CONTENT ===== */
+
 .content {
   flex: 1;
   display: flex;
@@ -60,117 +93,100 @@ body {
   justify-content: center;
 }
 
-.center {
-  text-align: center;
-}
-
-h1 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  font-weight: 800;
-}
-
-h2 {
-  font-size: 22px;
-  margin-bottom: 25px;
-  font-weight: 700;
+h1, h2 {
+  margin-bottom: 16px;
+  line-height: 1.3;
 }
 
 p {
-  color: #aab0bb;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #c0c5cf;
   line-height: 1.5;
 }
+
+/* ===== OPTIONS ===== */
 
 .options {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 30px;
+  gap: 12px; /* кратно 4 */
+  margin-bottom: 24px;
 }
 
 .option {
-  background: #151922;
-  padding: 16px;
-  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.option:hover {
-  border-color: #4f8cff;
+.option img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .option.selected {
   border-color: #4f8cff;
-  background: #1b2431;
+  background: rgba(79,140,255,0.15);
+}
+
+/* ===== BUTTONS ===== */
+
+.button-row {
+  display: flex;
+  gap: 12px;
 }
 
 .btn {
-  background: linear-gradient(90deg,#4f8cff,#00d4ff);
-  border: none;
+  width: 100%;
   padding: 16px;
-  border-radius: 14px;
+  border-radius: 12px;
+  border: none;
   font-weight: 600;
   font-size: 16px;
-  color: white;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-.btn:active {
-  transform: scale(0.98);
+.btn-primary {
+  background: linear-gradient(90deg,#4f8cff,#00d4ff);
+  color: white;
+}
+
+.btn-secondary {
+  background: #1c212b;
+  color: #c0c5cf;
 }
 
 .small {
-  font-size: 13px;
-  color: #6f7683;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.card {
-  background: #151922;
-  padding: 18px;
-  border-radius: 16px;
-  margin-bottom: 15px;
-}
-
-.plan {
-  border: 1px solid #2a313d;
-  padding: 16px;
-  border-radius: 16px;
-  margin-bottom: 15px;
-}
-
-.plan.best {
-  border: 2px solid #4f8cff;
-  background: #192233;
-}
-
-.badge {
   font-size: 12px;
-  background: #4f8cff;
-  padding: 4px 8px;
-  border-radius: 8px;
-  display: inline-block;
-  margin-bottom: 8px;
+  text-align: center;
+  margin-top: 12px;
+  color: #6d7482;
 }
+
+/* ===== LOADER ===== */
 
 .loader {
-  border: 4px solid #1a1f27;
+  border: 4px solid #1c212b;
   border-top: 4px solid #4f8cff;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
+  margin: 32px auto;
   animation: spin 1s linear infinite;
-  margin: 30px auto;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
 </style>
 </head>
 
@@ -179,113 +195,99 @@ p {
 <div class="app" id="app"></div>
 
 <script>
+
 const screens = [
 
-{type:"text",title:"Upgrade Yourself",text:"This short assessment will evaluate your discipline, physical energy, focus, and drive."},
+{type:"text",bg:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+title:"Upgrade Yourself",
+text:"This short assessment will evaluate your discipline, focus and physical energy."},
 
-{type:"text",title:"Most men never reach their full potential.",text:"Not because they lack talent — but because they lack structure."},
-
-{type:"question",title:"How would you describe your current physical shape?",options:["Strong & athletic","Average, could improve","Low energy & inconsistent"]},
-
-{type:"question",title:"How often do you train per week?",options:["4+ times","1–3 times","Rarely"]},
-
-{type:"text",title:"Structured men win.",text:"Consistency multiplies results."},
-
-{type:"question",title:"How would you rate your daily focus?",options:["Extremely focused","Distracted sometimes","Struggle to concentrate"]},
-
-{type:"question",title:"How confident are you socially?",options:["Very confident","Depends on context","Often insecure"]},
-
-{type:"text",title:"You're doing better than 73% of men.",text:"Let's go deeper."},
-
-{type:"question",title:"How consistent is your sleep schedule?",options:["Strict routine","Inconsistent","Random"]},
-
-{type:"question",title:"Do you follow a nutrition strategy?",options:["Structured plan","Try to eat healthy","No system"]},
-
-{type:"text",title:"Elite men focus on 3 pillars.",text:"Strength. Focus. Discipline."},
-
-{type:"question",title:"How often do you procrastinate?",options:["Rarely","Sometimes","Frequently"]},
-
-{type:"question",title:"How satisfied are you with your income?",options:["Fully satisfied","Improving","Frustrated"]},
+{type:"question",
+bg:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b",
+title:"How would you describe your current shape?",
+options:[
+{img:"https://images.unsplash.com/photo-1599058917212-d750089bc07e",text:"Strong & athletic"},
+{img:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61",text:"Average"},
+{img:"https://images.unsplash.com/photo-1546484959-f0fcbf1b5e4e",text:"Low energy"}
+]},
 
 {type:"loading"},
 
-{type:"text",title:"Your results are ready.",text:"Here's what we discovered."},
-
-{type:"text",title:"High potential detected.",text:"But inconsistent structure slows progress."},
-
-{type:"text",title:"We built a system for you.",text:"Improve strength, focus, and confidence."},
-
-{type:"text",title:"In 30 days you may notice:",text:"• Higher energy\n• Sharper focus\n• Stronger discipline"},
-
-{type:"text",title:"48,000+ men upgraded already.",text:"Consistency changes everything."},
-
-{type:"paywall"}
+{type:"paywall",
+bg:"https://images.unsplash.com/photo-1558611848-73f7eb4001a1"}
 
 ];
 
 let current = 0;
 
 function render(){
-const app = document.getElementById("app");
-const progress = Math.min((current/(screens.length-1))*100,100);
+const screen = screens[current];
+const progress = (current/(screens.length-1))*100;
 
-app.innerHTML = `
-<div class="screen active">
-<div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+document.getElementById("app").innerHTML = `
+<div class="screen" style="background-image:url('${screen.bg || ""}')">
+<div class="inner">
+
+<div class="logo">UPGRADE</div>
+
+<div class="progress">
+<div class="progress-bar" style="width:${progress}%"></div>
+</div>
+
 <div class="content">
-${renderContent(screens[current])}
+${renderContent(screen)}
+</div>
+
+${current>0 ? `<div class="button-row">
+<button class="btn btn-secondary" onclick="prev()">Back</button>
+</div>` : ""}
+
 </div>
 </div>`;
 }
 
 function renderContent(screen){
+
 if(screen.type==="text"){
-return `<div>
+return `
 <h1>${screen.title}</h1>
-<p>${screen.text.replace(/\n/g,"<br>")}</p>
-<button class="btn" onclick="next()">Continue</button>
-</div>`;
+<p>${screen.text}</p>
+<button class="btn btn-primary" onclick="next()">Continue</button>
+`;
 }
 
 if(screen.type==="question"){
-return `<div>
+return `
 <h2>${screen.title}</h2>
 <div class="options">
-${screen.options.map(o=>`<div class="option" onclick="select(this)">${o}</div>`).join("")}
+${screen.options.map(o=>`
+<div class="option" onclick="select(this)">
+<img src="${o.img}">
+<div>${o.text}</div>
 </div>
-<button class="btn" onclick="next()">Continue</button>
-</div>`;
+`).join("")}
+</div>
+<button class="btn btn-primary" onclick="next()">Continue</button>
+`;
 }
 
 if(screen.type==="loading"){
 setTimeout(()=>next(),2000);
-return `<div class="center">
-<h1>Analyzing your discipline profile...</h1>
+return `
+<h1>Analyzing your profile...</h1>
 <div class="loader"></div>
-</div>`;
+`;
 }
 
 if(screen.type==="paywall"){
 return `
 <h1>Choose Your Upgrade Plan</h1>
 
-<div class="plan">
-<h3>Monthly</h3>
-<p>$19.99 / month</p>
-</div>
+<div class="option">Monthly — $19.99</div>
+<div class="option selected">3 Months — $39.99 (Best Value)</div>
+<div class="option">Annual — $79.99</div>
 
-<div class="plan best">
-<div class="badge">Best Value</div>
-<h3>3 Months</h3>
-<p>$39.99</p>
-</div>
-
-<div class="plan">
-<h3>Annual</h3>
-<p>$79.99</p>
-</div>
-
-<button class="btn">Unlock My Plan</button>
+<button class="btn btn-primary">Unlock My Plan</button>
 <p class="small">Auto-renews. Cancel anytime.</p>
 `;
 }
@@ -298,12 +300,20 @@ render();
 }
 }
 
+function prev(){
+if(current>0){
+current--;
+render();
+}
+}
+
 function select(el){
 document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
 el.classList.add("selected");
 }
 
 render();
+
 </script>
 
 </body>
