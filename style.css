@@ -23,7 +23,7 @@ body {
 .logo {
     display: block;
     margin: 0 auto 12px; /* 12px */
-    height: 20px; /* меньше */
+    height: 16px; /* меньше */
 }
 
 /* Progress bar */
