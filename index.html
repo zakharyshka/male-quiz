@@ -1,60 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Chair Dance</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chair Dance</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Logo -->
-    <img src="logotype.svg" alt="Logo" class="logo">
-
-    <!-- Progress bar -->
+<!-- FIXED HEADER -->
+<header class="header">
+    <img src="logotype.svg" class="logo" alt="Logo">
     <div class="progress-wrapper">
-        <div class="progress-bar"></div>
+        <div class="progress-bar" id="progressBar"></div>
     </div>
+</header>
 
-    <!-- Hero image -->
-    <div class="image-wrapper">
-        <img src="first.jpg" alt="Chair Dance">
-        <div class="image-overlay"></div>
-    </div>
+<!-- SCREENS WRAPPER -->
+<div class="screens">
 
-    <!-- Content -->
-    <div class="content">
-        <h2 class="subtitle-top">GET FIT WITH</h2>
-        <h1>CHAIR DANCE</h1>
-        <p class="description">
-            An easy, effective chair dance plan designed for real results at any level
-        </p>
+    <!-- SCREEN 1 -->
+    <section class="screen active" id="screen1">
 
-        <p class="select-title">Select your your main goal:</p>
-
-        <div class="buttons">
-            <button class="option-btn">🍕 Fat burning</button>
-            <button class="option-btn">💪 Muscle shaping</button>
-            <button class="option-btn">🔥 Increased testosterone</button>
-            <button class="option-btn">⚖️ All of the above</button>
+        <div class="image-wrapper">
+            <img src="first.jpg" alt="">
+            <div class="image-overlay"></div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>
+        <div class="content">
+            <h2 class="subtitle-top">GET FIT WITH</h2>
+            <h1>CHAIR DANCE</h1>
+            <p class="description">
+                An easy, effective chair dance plan designed for real results at any level
+            </p>
+
+            <p class="select-title">Select your your main goal:</p>
+
+            <div class="buttons">
+                <button class="option-btn" onclick="goToScreen(2)">🍕 Fat burning</button>
+                <button class="option-btn" onclick="goToScreen(2)">💪 Muscle shaping</button>
+                <button class="option-btn" onclick="goToScreen(2)">🔥 Increased testosterone</button>
+                <button class="option-btn" onclick="goToScreen(2)">⚖️ All of the above</button>
+            </div>
+        </div>
+
+        <div class="footer">
             By continuing, you agree to our<br>
             <span class="link">Terms of Service</span> and <span class="link">Refund Policy</span>.<br>
             2015-2026, Great Apps LLC,<br>
             1460 Broadway, 4th Floor<br>
             New York, NY 10036<br>
             (888) 305-2077
-        </p>
-    </div>
+        </div>
+
+    </section>
+
+
+    <!-- SCREEN 2 -->
+    <section class="screen" id="screen2">
+
+        <div class="content top-space">
+
+            <h1 class="question-title">What is your age?</h1>
+            <p class="description">Our plan adapts to your age</p>
+
+            <div class="age-grid">
+
+                <button class="age-card">
+                    <img src="35.png">
+                    <span>18-35</span>
+                </button>
+
+                <button class="age-card">
+                    <img src="45.png">
+                    <span>36-45</span>
+                </button>
+
+                <button class="age-card">
+                    <img src="55.png">
+                    <span>46-55</span>
+                </button>
+
+                <button class="age-card">
+                    <img src="56.png">
+                    <span>56+</span>
+                </button>
+
+            </div>
+
+            <button class="back-btn" onclick="goToScreen(1)">BACK</button>
+
+        </div>
+
+    </section>
 
 </div>
+
+<script>
+function goToScreen(screenNumber) {
+
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    document.getElementById('screen' + screenNumber).classList.add('active');
+
+    const progress = document.getElementById("progressBar");
+
+    if(screenNumber === 1){
+        progress.style.width = "5%";
+    }
+
+    if(screenNumber === 2){
+        progress.style.width = "10%";
+    }
+}
+</script>
 
 </body>
 </html>
