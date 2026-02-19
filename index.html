@@ -101,6 +101,20 @@ gap:12px;
 padding-top:28px;
 }
 
+/* ===== FIRST SCREEN FIX ===== */
+
+.screen[data-step="1"] .footer{
+margin-top:28px;   /* ровно 28px от текста */
+padding-top:0;     /* убираем лишние 28px */
+gap:0;             /* отключаем flex gap */
+position:static;   /* не закрепляем */
+}
+
+/* ровно 8px между кнопками первого экрана */
+.screen[data-step="1"] .option + .option{
+margin-top:8px;
+}
+
 .first-footer{
 margin-top:28px; /* 28px от текста */
 gap:8px;         /* ровно 8px между кнопками */
