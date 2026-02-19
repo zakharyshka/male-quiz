@@ -280,9 +280,21 @@ max-width:420px;
 /* TEXT POSITION FIX FOR 1,3,7 */
 
 .push-bottom{
-margin-top:240px;   /* было auto */
-margin-bottom:40px;
+margin-top:0;      /* убираем auto */
+margin-bottom:0;
 }
+
+/* ===== EXACT SPACING FIX ===== */
+
+/* Первый экран — 28px до кнопок */
+.screen[data-step="1"] .content{
+margin-bottom:28px;
+}
+
+/* Третий экран — 40px до кнопок */
+.screen[data-step="3"] .content{
+margin-bottom:40px;
+} 
 
 /* LOADER */
 
