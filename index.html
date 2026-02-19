@@ -2,211 +2,461 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Everdance Quiz</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+:root{
+--bg:#0f0f12;
+--card:#1b1b22;
+--text:#ffffff;
+--muted:#9c9ca5;
+--accent:#6C63FF;
+--border:#2a2a34;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+display:flex;
+justify-content:center;
+height:100vh;
+overflow:hidden;
+}
+
+.app{
+width:100%;
+max-width:420px;
+height:100vh;
+display:flex;
+flex-direction:column;
+position:relative;
+}
+
+/* HEADER */
+
+.header{
+padding:16px;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.logo{
+width:120px;
+align-self:center;
+}
+
+.progress{
+height:4px;
+background:#2a2a32;
+border-radius:4px;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:var(--accent);
+transition:0.3s;
+}
+
+/* SCREENS */
+
+.screen{
+flex:1;
+display:none;
+flex-direction:column;
+padding:24px 20px;
+gap:16px;
+position:relative;
+}
+
+.screen.active{
+display:flex;
+}
+
+.center{
+text-align:center;
+}
+
+h1{
+font-size:26px;
+font-weight:800;
+line-height:1.2;
+}
+
+h2{
+font-size:14px;
+font-weight:600;
+text-transform:uppercase;
+opacity:0.7;
+}
+
+p{
+font-size:14px;
+color:var(--muted);
+line-height:1.4;
+}
+
+.bold{
+font-weight:600;
+color:#fff;
+}
+
+/* OPTIONS */
+
+.option{
+background:var(--card);
+border:2px solid transparent;
+border-radius:10px;
+padding:16px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:12px;
+font-size:15px;
+}
+
+.option.active{
+border-color:var(--accent);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.image-option{
+background:var(--card);
+border:2px solid transparent;
+border-radius:10px;
+padding:8px;
+text-align:center;
+cursor:pointer;
+}
+
+.image-option img{
+width:100%;
+border-radius:10px;
+}
+
+.image-option.active{
+border-color:var(--accent);
+}
+
+/* INPUTS */
+
+input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:2px solid var(--border);
+background:var(--card);
+color:#fff;
+font-size:14px;
+}
+
+/* FOOTER BUTTONS */
+
+.footer{
+margin-top:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+button{
+padding:14px;
+border-radius:10px;
+border:none;
+font-weight:600;
+font-size:15px;
+cursor:pointer;
+}
+
+.primary{
+background:var(--accent);
+color:#fff;
+}
+
+.primary:disabled{
+opacity:0.4;
+cursor:not-allowed;
+}
+
+.secondary{
+background:#2a2a34;
+color:#fff;
+}
+
+/* BACKGROUND IMAGE SCREENS */
+
+.bg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0.35;
+z-index:-2;
+}
+
+.bg-gradient{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:50%;
+background:linear-gradient(to bottom,transparent,var(--bg));
+z-index:-1;
+}
+
+/* Loader */
+
+.loader{
+font-size:32px;
+letter-spacing:4px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:0.2}
+50%{opacity:1}
+100%{opacity:0.2}
+}
+
+.best{
+border:2px solid var(--accent);
+background:#26263a;
+}
+
+</style>
 </head>
 <body>
 
 <div class="app">
 
-<header class="header">
-  <img src="logotype.svg" class="logo" alt="Everdance">
-  <div class="progress">
-    <div class="progress-bar"></div>
-  </div>
-</header>
-
-<main class="quiz">
-
-<!-- SCREEN 1 -->
-<section class="screen active bg-screen" data-step="1">
-  <div class="bg" style="background-image:url('chair.jpg')"></div>
-  <div class="content center">
-
-    <p class="pretitle">Get fit with</p>
-    <h1 class="hero">CHAIR DANCE</h1>
-
-    <p class="description">
-      An easy, effective chair dance plan designed for real results at any level
-    </p>
-
-    <p class="label">Select your your main goal:</p>
-
-    <div class="options">
-      <button class="btn primary continue">🍕 Fat burning</button>
-      <button class="btn primary continue">💪 Muscle shaping</button>
-      <button class="btn primary continue">🔥 Increased testosterone</button>
-      <button class="btn primary continue">⚖️ All of the above</button>
-    </div>
-
-  </div>
-</section>
-
-<!-- SCREEN 2 -->
-<section class="screen" data-step="2">
-  <div class="content">
-    <h2>What is your age?</h2>
-    <p class="description center">Our plan adapts to your age</p>
-
-    <div class="grid">
-      <div class="img-option"><img src="18-35.jpg"><span>18-35</span></div>
-      <div class="img-option"><img src="36-45.jpg"><span>36-45</span></div>
-      <div class="img-option"><img src="46-55.jpg"><span>46-55</span></div>
-      <div class="img-option"><img src="56.jpg"><span>56+</span></div>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue" disabled>Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 3 -->
-<section class="screen bg-screen" data-step="3">
-  <div class="bg" style="background-image:url('man.jpg')"></div>
-  <div class="content center">
-    <p class="pretitle">The solution</p>
-    <h1 class="hero">RIGHT HERE!</h1>
-    <p class="description">
-      Most men never reach their full potential. Not because they lack talent —
-      but because they lack structure. Train with us and your results may surprise you.
-    </p>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue">Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 4 -->
-<section class="screen" data-step="4">
-  <div class="content">
-    <h2>How would you describe your current physical shape?</h2>
-    <div class="options">
-      <button class="option">💪 Strong & athletic</button>
-      <button class="option">🎯 Average, could improve</button>
-      <button class="option">🪫 Low energy & inconsistent</button>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue" disabled>Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 5 -->
-<section class="screen" data-step="5">
-  <div class="content">
-    <h2>What is your body shape?</h2>
-
-    <div class="grid">
-      <div class="img-option"><img src="Rectangle.jpg"><span>Rectangle</span></div>
-      <div class="img-option"><img src="Triangle.jpg"><span>Triangle</span></div>
-      <div class="img-option"><img src="Rounded.jpg"><span>Rounded</span></div>
-      <div class="img-option"><img src="Trapezoid.jpg"><span>Trapezoid</span></div>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue" disabled>Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 6 -->
-<section class="screen" data-step="6">
-  <div class="content">
-    <h2>Are you happy with your body right now?</h2>
-    <div class="options">
-      <button class="option">😁 Yes, I feel great</button>
-      <button class="option">🙂 Sometimes, not always</button>
-      <button class="option">😒 No, I want to improve</button>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue" disabled>Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 7 -->
-<section class="screen bg-screen" data-step="7">
-  <div class="bg" style="background-image:url('group.jpg')"></div>
-  <div class="content center">
-    <h1 class="hero">1 MLN PEOPLE</h1>
-    <p class="pretitle">Have chosen everdance</p>
-    <p class="description">
-      Become part of our large community and move towards your goals step by step.
-      The road emerges beneath the feet of those who walk.
-    </p>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue">Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 8 -->
-<section class="screen" data-step="8">
-  <div class="content">
-    <h2>Your goal weight</h2>
-
-    <p class="description">
-      Please indicate your current weight and the weight you are aiming for.
-    </p>
-
-    <label>Current weight (Kg):</label>
-    <input type="number" class="input">
-
-    <label>Goal weight (Kg):</label>
-    <input type="number" class="input">
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary back">Back</button>
-    <button class="btn primary continue" disabled>Continue</button>
-  </div>
-</section>
-
-<!-- SCREEN 9 -->
-<section class="screen center" data-step="9">
-  <div class="content center">
-    <h2>Analyzing</h2>
-    <p class="description">Let us analyze your data and calculate the results</p>
-    <div class="loader"></div>
-  </div>
-</section>
-
-<!-- SCREEN 10 -->
-<section class="screen" data-step="10">
-  <div class="content">
-    <h2>Chose your plan!</h2>
-    <p class="description center">Auto-renews. Cancel anytime.</p>
-
-    <div class="options">
-      <button class="option">Monthly – $19.99</button>
-      <button class="option best">3 Months – $39.99 (Best Value)</button>
-      <button class="option">Annual – $79.99</button>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button class="btn secondary">Contact us</button>
-    <button class="btn primary restart">Unlock My Plan</button>
-  </div>
-</section>
-
-</main>
+<div class="header">
+<img src="logotype.svg" class="logo">
+<div class="progress"><div class="progress-fill"></div></div>
 </div>
 
-<script src="script.js"></script>
+<!-- SCREEN 1 -->
+<div class="screen active" data-step="1">
+<img src="chair.jpg" class="bg">
+<div class="bg-gradient"></div>
+
+<h2 class="center">Get fit with</h2>
+<h1 class="center">CHAIR DANCE</h1>
+<p class="center">An easy, effective chair dance plan designed for real results at any level</p>
+<p class="bold center">Select your your main goal:</p>
+
+<div class="option select">🍕 Fat burning</div>
+<div class="option select">💪 Muscle shaping</div>
+<div class="option select">🔥 Increased testosterone</div>
+<div class="option select">⚖️ All of the above</div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" data-step="2">
+<h1 class="center">What is your age?</h1>
+<p class="center">Our plan adapts to your age</p>
+
+<div class="grid">
+<div class="image-option select"><img src="18-35.jpg"><p>18-35</p></div>
+<div class="image-option select"><img src="36-45.jpg"><p>36-45</p></div>
+<div class="image-option select"><img src="46-55.jpg"><p>46-55</p></div>
+<div class="image-option select"><img src="56.jpg"><p>56+</p></div>
+</div>
+
+<div class="footer">
+<button class="primary next" disabled>Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" data-step="3">
+<img src="man.jpg" class="bg">
+<div class="bg-gradient"></div>
+
+<h2 class="center">The solution</h2>
+<h1 class="center">RIGHT HERE!</h1>
+<p class="center">Most men never reach their full potential. Not because they lack talent — but because they lack structure. Train with us and your results may surprise you.</p>
+
+<div class="footer">
+<button class="primary next">Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" data-step="4">
+<h1 class="center">How would you describe your current physical shape?</h1>
+
+<div class="option select">💪 Strong & athletic</div>
+<div class="option select">🎯 Average, could improve</div>
+<div class="option select">🪫 Low energy & inconsistent</div>
+
+<div class="footer">
+<button class="primary next" disabled>Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen" data-step="5">
+<h1 class="center">What is your body shape?</h1>
+
+<div class="grid">
+<div class="image-option select"><img src="Rectangle.jpg"><p>Rectangle</p></div>
+<div class="image-option select"><img src="Triangle.jpg"><p>Triangle</p></div>
+<div class="image-option select"><img src="Rounded.jpg"><p>Rounded</p></div>
+<div class="image-option select"><img src="Trapezoid.jpg"><p>Trapezoid</p></div>
+</div>
+
+<div class="footer">
+<button class="primary next" disabled>Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 6 -->
+<div class="screen" data-step="6">
+<h1 class="center">Are you happy with your body right now?</h1>
+
+<div class="option select">😁 Yes, I feel great</div>
+<div class="option select">🙂 Sometimes, not always</div>
+<div class="option select">😒 No, I want to improve</div>
+
+<div class="footer">
+<button class="primary next" disabled>Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 7 -->
+<div class="screen" data-step="7">
+<img src="group.jpg" class="bg">
+<div class="bg-gradient"></div>
+
+<h1 class="center">1 MLN PEOPLE</h1>
+<h2 class="center">Have chosen everdance</h2>
+<p class="center">Become part of our large community and move towards your goals step by step. The road emerges beneath the feet of those who walk.</p>
+
+<div class="footer">
+<button class="primary next">Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 8 -->
+<div class="screen" data-step="8">
+<h1 class="center">Your goal weight</h1>
+<p class="center">Please indicate your current weight and the weight you are aiming for.</p>
+
+<p class="bold">Current weight (Kg):</p>
+<input type="number" id="currentWeight">
+
+<p class="bold">Goal weight (Kg):</p>
+<input type="number" id="goalWeight">
+
+<div class="footer">
+<button class="primary next" disabled>Continue</button>
+<button class="secondary back">Back</button>
+</div>
+</div>
+
+<!-- SCREEN 9 -->
+<div class="screen" data-step="9">
+<h1 class="center">Analyzing</h1>
+<p class="center">Let us analyze your data and calculate the results</p>
+<div class="loader center">•••</div>
+</div>
+
+<!-- SCREEN 10 -->
+<div class="screen" data-step="10">
+<h1 class="center">Chose your plan!</h1>
+<p class="center">Auto-renews. Cancel anytime.</p>
+
+<div class="option select">Monthly – $19.99</div>
+<div class="option select best">3 Months – $39.99 (Best Value)</div>
+<div class="option select">Annual – $79.99</div>
+
+<div class="footer">
+<button class="primary" id="restart">Unlock My Plan</button>
+<button class="secondary">Contact us</button>
+</div>
+</div>
+
+</div>
+
+<script>
+
+let currentStep=1;
+const screens=document.querySelectorAll('.screen');
+const progress=document.querySelector('.progress-fill');
+
+function showStep(step){
+screens.forEach(s=>s.classList.remove('active'));
+document.querySelector(`[data-step="${step}"]`).classList.add('active');
+progress.style.width=((step-1)/9*100)+"%";
+currentStep=step;
+if(step===9){
+setTimeout(()=>showStep(10),3000);
+}
+}
+
+document.addEventListener('click',e=>{
+
+if(e.target.classList.contains('next')){
+showStep(currentStep+1);
+}
+
+if(e.target.classList.contains('back')){
+showStep(currentStep-1);
+}
+
+if(e.target.classList.contains('select')){
+let parent=e.target.closest('.screen');
+parent.querySelectorAll('.select').forEach(el=>el.classList.remove('active'));
+e.target.classList.add('active');
+
+let btn=parent.querySelector('.next');
+if(btn) btn.disabled=false;
+}
+
+});
+
+document.getElementById('currentWeight')?.addEventListener('input',checkWeight);
+document.getElementById('goalWeight')?.addEventListener('input',checkWeight);
+
+function checkWeight(){
+let c=document.getElementById('currentWeight').value;
+let g=document.getElementById('goalWeight').value;
+let btn=document.querySelector('[data-step="8"] .next');
+if(c && g) btn.disabled=false;
+else btn.disabled=true;
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+showStep(1);
+});
+
+</script>
+
 </body>
 </html>
