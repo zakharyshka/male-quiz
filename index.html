@@ -97,13 +97,21 @@ flex-direction:column;
 margin-top:auto;
 display:flex;
 flex-direction:column;
-gap:8px;
+gap:12px;
 padding-top:28px;
-
-position:sticky; /* изменено */
-bottom:0;        /* добавлено */
 }
 
+.first-footer{
+margin-top:28px; /* 28px от текста */
+gap:8px;         /* ровно 8px между кнопками */
+position:static; /* не закрепляется */
+}
+
+/* Закрепление только для экранов со стандартными кнопками */
+.screen:not([data-step="1"]) .footer{
+position:sticky;
+bottom:0;
+}
 /* TYPOGRAPHY */
 
 .subtitle{
@@ -307,7 +315,7 @@ animation:blink 1s infinite;
 <div class="text bold" style="margin-top:28px;">Select your your main goal:</div>
 </div>
 
-<div class="footer">
+<div class="footer first-footer">
 <div class="option direct-next">🍕 Fat burning</div>
 <div class="option direct-next">💪 Muscle shaping</div>
 <div class="option direct-next">🔥 Increased testosterone</div>
