@@ -30,14 +30,13 @@ background:var(--bg);
 color:var(--text);
 display:flex;
 justify-content:center;
-height:100vh;
-overflow:hidden;
+min-height:100vh;
 }
 
 .app{
 width:100%;
 max-width:420px;
-height:100vh;
+min-height:100vh;
 display:flex;
 flex-direction:column;
 position:relative;
@@ -50,6 +49,10 @@ padding:16px;
 display:flex;
 flex-direction:column;
 gap:12px;
+position:sticky;
+top:0;
+background:var(--bg);
+z-index:10;
 }
 
 .logo{
@@ -77,7 +80,7 @@ transition:0.3s;
 flex:1;
 display:none;
 flex-direction:column;
-padding:24px 20px;
+padding:24px 20px 24px 20px;
 gap:16px;
 position:relative;
 }
@@ -145,11 +148,19 @@ border-radius:10px;
 padding:8px;
 text-align:center;
 cursor:pointer;
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
 .image-option img{
 width:100%;
 border-radius:10px;
+pointer-events:none;
+}
+
+.image-option p{
+pointer-events:none;
 }
 
 .image-option.active{
@@ -168,7 +179,7 @@ color:#fff;
 font-size:14px;
 }
 
-/* FOOTER BUTTONS */
+/* FOOTER */
 
 .footer{
 margin-top:auto;
@@ -201,30 +212,55 @@ background:#2a2a34;
 color:#fff;
 }
 
-/* BACKGROUND IMAGE SCREENS */
+/* BACKGROUND 50% */
 
-.bg{
+.bg-half{
 position:absolute;
 top:0;
 left:0;
 width:100%;
-height:100%;
+height:50%;
 object-fit:cover;
-opacity:0.35;
+opacity:0.5;
 z-index:-2;
 }
 
-.bg-gradient{
+.bg-fade{
 position:absolute;
-bottom:0;
+top:30%;
 left:0;
 width:100%;
-height:50%;
+height:40%;
 background:linear-gradient(to bottom,transparent,var(--bg));
 z-index:-1;
 }
 
-/* Loader */
+/* SPECIAL SPACING FOR 3 & 7 */
+
+.content-bottom{
+margin-top:auto;
+margin-bottom:40px;
+}
+
+/* SCREEN 1 SPECIFIC */
+
+.screen1-options{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-top:auto;
+}
+
+/* LOADER */
+
+.loader-wrapper{
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:16px;
+}
 
 .loader{
 font-size:32px;
@@ -256,21 +292,21 @@ background:#26263a;
 
 <!-- SCREEN 1 -->
 <div class="screen active" data-step="1">
-<img src="chair.jpg" class="bg">
-<div class="bg-gradient"></div>
+<img src="chair.jpg" class="bg-half">
+<div class="bg-fade"></div>
 
+<div class="content-bottom">
 <h2 class="center">Get fit with</h2>
 <h1 class="center">CHAIR DANCE</h1>
 <p class="center">An easy, effective chair dance plan designed for real results at any level</p>
 <p class="bold center">Select your your main goal:</p>
+</div>
 
-<div class="option select">🍕 Fat burning</div>
-<div class="option select">💪 Muscle shaping</div>
-<div class="option select">🔥 Increased testosterone</div>
-<div class="option select">⚖️ All of the above</div>
-  <div class="footer">
-<button class="primary next" disabled>Continue</button>
-<button class="secondary back">Back</button>
+<div class="screen1-options">
+<div class="option direct-next">🍕 Fat burning</div>
+<div class="option direct-next">💪 Muscle shaping</div>
+<div class="option direct-next">🔥 Increased testosterone</div>
+<div class="option direct-next">⚖️ All of the above</div>
 </div>
 </div>
 
@@ -294,12 +330,14 @@ background:#26263a;
 
 <!-- SCREEN 3 -->
 <div class="screen" data-step="3">
-<img src="man.jpg" class="bg">
-<div class="bg-gradient"></div>
+<img src="man.jpg" class="bg-half">
+<div class="bg-fade"></div>
 
-<h2 class="center">The solution</h2>
-<h1 class="center">RIGHT HERE!</h1>
-<p class="center">Most men never reach their full potential. Not because they lack talent — but because they lack structure. Train with us and your results may surprise you.</p>
+<div class="content-bottom center">
+<h2>The solution</h2>
+<h1>RIGHT HERE!</h1>
+<p>Most men never reach their full potential. Not because they lack talent — but because they lack structure.</p>
+</div>
 
 <div class="footer">
 <button class="primary next">Continue</button>
@@ -354,12 +392,14 @@ background:#26263a;
 
 <!-- SCREEN 7 -->
 <div class="screen" data-step="7">
-<img src="group.jpg" class="bg">
-<div class="bg-gradient"></div>
+<img src="group.jpg" class="bg-half">
+<div class="bg-fade"></div>
 
-<h1 class="center">1 MLN PEOPLE</h1>
-<h2 class="center">Have chosen everdance</h2>
-<p class="center">Become part of our large community and move towards your goals step by step. The road emerges beneath the feet of those who walk.</p>
+<div class="content-bottom center">
+<h1>1 MLN PEOPLE</h1>
+<h2>Have chosen everdance</h2>
+<p>Become part of our large community and move towards your goals step by step.</p>
+</div>
 
 <div class="footer">
 <button class="primary next">Continue</button>
@@ -386,9 +426,11 @@ background:#26263a;
 
 <!-- SCREEN 9 -->
 <div class="screen" data-step="9">
-<h1 class="center">Analyzing</h1>
-<p class="center">Let us analyze your data and calculate the results</p>
-<div class="loader center">•••</div>
+<div class="loader-wrapper">
+<h1>Analyzing</h1>
+<p>Let us analyze your data and calculate the results</p>
+<div class="loader">•••</div>
+</div>
 </div>
 
 <!-- SCREEN 10 -->
@@ -420,11 +462,21 @@ document.querySelector(`[data-step="${step}"]`).classList.add('active');
 progress.style.width=((step-1)/9*100)+"%";
 currentStep=step;
 if(step===9){
-setTimeout(()=>showStep(10),3000);
+setTimeout(()=>showStep(10),2500);
 }
+window.scrollTo(0,0);
 }
 
 document.addEventListener('click',e=>{
+
+const select=e.target.closest('.select');
+if(select){
+let parent=select.closest('.screen');
+parent.querySelectorAll('.select').forEach(el=>el.classList.remove('active'));
+select.classList.add('active');
+let btn=parent.querySelector('.next');
+if(btn) btn.disabled=false;
+}
 
 if(e.target.classList.contains('next')){
 showStep(currentStep+1);
@@ -434,13 +486,8 @@ if(e.target.classList.contains('back')){
 showStep(currentStep-1);
 }
 
-if(e.target.classList.contains('select')){
-let parent=e.target.closest('.screen');
-parent.querySelectorAll('.select').forEach(el=>el.classList.remove('active'));
-e.target.classList.add('active');
-
-let btn=parent.querySelector('.next');
-if(btn) btn.disabled=false;
+if(e.target.classList.contains('direct-next')){
+showStep(2);
 }
 
 });
