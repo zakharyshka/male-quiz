@@ -39,7 +39,6 @@ max-width:420px;
 min-height:100vh;
 display:flex;
 flex-direction:column;
-position:relative;
 }
 
 /* HEADER */
@@ -74,47 +73,61 @@ background:var(--accent);
 transition:0.3s;
 }
 
-/* SCREENS */
+/* SCREEN BASE */
 
 .screen{
 flex:1;
 display:none;
 flex-direction:column;
-padding:24px 20px 24px 20px;
-gap:16px;
-position:relative;
+padding:24px 20px;
 }
 
 .screen.active{
 display:flex;
 }
 
-.center{
-text-align:center;
+.content{
+display:flex;
+flex-direction:column;
 }
 
-h1{
-font-size:26px;
-font-weight:800;
-line-height:1.2;
+.footer{
+margin-top:auto;
+display:flex;
+flex-direction:column;
+gap:8px;
+padding-top:28px;
 }
 
-h2{
+/* TYPOGRAPHY */
+
+.subtitle{
 font-size:14px;
 font-weight:600;
 text-transform:uppercase;
 opacity:0.7;
 }
 
-p{
+.title{
+font-size:26px;
+font-weight:800;
+margin-top:8px;
+}
+
+.text{
 font-size:14px;
 color:var(--muted);
-line-height:1.4;
+margin-top:16px;
+line-height:1.5;
 }
 
 .bold{
 font-weight:600;
 color:#fff;
+}
+
+.center{
+text-align:center;
 }
 
 /* OPTIONS */
@@ -131,6 +144,10 @@ gap:12px;
 font-size:15px;
 }
 
+.option + .option{
+margin-top:8px;
+}
+
 .option.active{
 border-color:var(--accent);
 }
@@ -139,6 +156,7 @@ border-color:var(--accent);
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:16px;
+margin-top:28px;
 }
 
 .image-option{
@@ -161,13 +179,14 @@ pointer-events:none;
 
 .image-option p{
 pointer-events:none;
+font-size:14px;
 }
 
 .image-option.active{
 border-color:var(--accent);
 }
 
-/* INPUTS */
+/* INPUT */
 
 input{
 width:100%;
@@ -177,16 +196,15 @@ border:2px solid var(--border);
 background:var(--card);
 color:#fff;
 font-size:14px;
+margin-top:8px;
 }
 
-/* FOOTER */
-
-.footer{
-margin-top:auto;
-display:flex;
-flex-direction:column;
-gap:12px;
+label{
+margin-top:28px;
+font-weight:600;
 }
+
+/* BUTTONS */
 
 button{
 padding:14px;
@@ -212,43 +230,28 @@ background:#2a2a34;
 color:#fff;
 }
 
-/* BACKGROUND 50% */
+.best{
+border:2px solid var(--accent);
+background:#26263a;
+}
 
-.bg-half{
+/* BACKGROUND FULL */
+
+.bg-full{
 position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
 object-fit:cover;
-opacity:0.9;
-z-index:-2;
-}
-
-.bg-fade{
-position:absolute;
-top:30%;
-left:0;
-width:100%;
-height:40%;
-background:linear-gradient(to bottom,transparent,var(--bg));
 z-index:-1;
 }
 
-/* SPECIAL SPACING FOR 3 & 7 */
+/* TEXT POSITION FIX FOR 1,3,7 */
 
-.content-bottom{
+.push-bottom{
 margin-top:auto;
-margin-bottom:80px;
-}
-
-/* SCREEN 1 SPECIFIC */
-
-.screen1-options{
-display:flex;
-flex-direction:column;
-gap:8px;
-margin-top:auto;
+margin-bottom:40px;
 }
 
 /* LOADER */
@@ -259,6 +262,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 gap:16px;
 }
 
@@ -274,11 +278,6 @@ animation:blink 1s infinite;
 100%{opacity:0.2}
 }
 
-.best{
-border:2px solid var(--accent);
-background:#26263a;
-}
-
 </style>
 </head>
 <body>
@@ -292,17 +291,15 @@ background:#26263a;
 
 <!-- SCREEN 1 -->
 <div class="screen active" data-step="1">
-<img src="11.png" class="bg-half">
-<div class="bg-fade"></div>
-
-<div class="content-bottom">
-<h2 class="center">Get fit with</h2>
-<h1 class="center">CHAIR DANCE</h1>
-<p class="center">An easy, effective chair dance plan designed for real results at any level</p>
-<p class="bold center">Select your your main goal:</p>
+<img src="chair.jpg" class="bg-full">
+<div class="content push-bottom center">
+<div class="subtitle">Get fit with</div>
+<div class="title">CHAIR DANCE</div>
+<div class="text">An easy, effective chair dance plan designed for real results at any level</div>
+<div class="text bold" style="margin-top:28px;">Select your your main goal:</div>
 </div>
 
-<div class="screen1-options">
+<div class="footer">
 <div class="option direct-next">🍕 Fat burning</div>
 <div class="option direct-next">💪 Muscle shaping</div>
 <div class="option direct-next">🔥 Increased testosterone</div>
@@ -312,13 +309,15 @@ background:#26263a;
 
 <!-- SCREEN 2 -->
 <div class="screen" data-step="2">
-<h1 class="center">What is your age?</h1>
-<p class="center">Our plan adapts to your age</p>
+<div class="content center">
+<div class="title">What is your age?</div>
+<div class="text">Our plan adapts to your age</div>
+</div>
 
 <div class="grid">
 <div class="image-option select"><img src="18-35.jpg"><p>18-35</p></div>
-<div class="image-option select"><img src="35-45.jpg"><p>36-45</p></div>
-<div class="image-option select"><img src="45-55.jpg"><p>46-55</p></div>
+<div class="image-option select"><img src="36-45.jpg"><p>36-45</p></div>
+<div class="image-option select"><img src="46-55.jpg"><p>46-55</p></div>
 <div class="image-option select"><img src="56.jpg"><p>56+</p></div>
 </div>
 
@@ -330,13 +329,11 @@ background:#26263a;
 
 <!-- SCREEN 3 -->
 <div class="screen" data-step="3">
-<img src="man.jpg" class="bg-half">
-<div class="bg-fade"></div>
-
-<div class="content-bottom center">
-<h2>The solution</h2>
-<h1>RIGHT HERE!</h1>
-<p>Most men never reach their full potential. Not because they lack talent — but because they lack structure.</p>
+<img src="man.jpg" class="bg-full">
+<div class="content push-bottom center">
+<div class="subtitle">The solution</div>
+<div class="title">RIGHT HERE!</div>
+<div class="text">Most men never reach their full potential. Not because they lack talent — but because they lack structure.</div>
 </div>
 
 <div class="footer">
@@ -347,11 +344,15 @@ background:#26263a;
 
 <!-- SCREEN 4 -->
 <div class="screen" data-step="4">
-<h1 class="center">How would you describe your current physical shape?</h1>
+<div class="content center">
+<div class="title">How would you describe your current physical shape?</div>
+</div>
 
+<div style="margin-top:28px;">
 <div class="option select">💪 Strong & athletic</div>
 <div class="option select">🎯 Average, could improve</div>
 <div class="option select">🪫 Low energy & inconsistent</div>
+</div>
 
 <div class="footer">
 <button class="primary next" disabled>Continue</button>
@@ -361,7 +362,9 @@ background:#26263a;
 
 <!-- SCREEN 5 -->
 <div class="screen" data-step="5">
-<h1 class="center">What is your body shape?</h1>
+<div class="content center">
+<div class="title">What is your body shape?</div>
+</div>
 
 <div class="grid">
 <div class="image-option select"><img src="Rectangle.jpg"><p>Rectangle</p></div>
@@ -378,11 +381,15 @@ background:#26263a;
 
 <!-- SCREEN 6 -->
 <div class="screen" data-step="6">
-<h1 class="center">Are you happy with your body right now?</h1>
+<div class="content center">
+<div class="title">Are you happy with your body right now?</div>
+</div>
 
+<div style="margin-top:28px;">
 <div class="option select">😁 Yes, I feel great</div>
 <div class="option select">🙂 Sometimes, not always</div>
 <div class="option select">😒 No, I want to improve</div>
+</div>
 
 <div class="footer">
 <button class="primary next" disabled>Continue</button>
@@ -392,13 +399,11 @@ background:#26263a;
 
 <!-- SCREEN 7 -->
 <div class="screen" data-step="7">
-<img src="group.jpg" class="bg-half">
-<div class="bg-fade"></div>
-
-<div class="content-bottom center">
-<h1>1 MLN PEOPLE</h1>
-<h2>Have chosen everdance</h2>
-<p>Become part of our large community and move towards your goals step by step.</p>
+<img src="group.jpg" class="bg-full">
+<div class="content push-bottom center">
+<div class="title">1 MLN PEOPLE</div>
+<div class="subtitle" style="margin-top:8px;">Have chosen everdance</div>
+<div class="text">Become part of our large community and move towards your goals step by step.</div>
 </div>
 
 <div class="footer">
@@ -409,13 +414,15 @@ background:#26263a;
 
 <!-- SCREEN 8 -->
 <div class="screen" data-step="8">
-<h1 class="center">Your goal weight</h1>
-<p class="center">Please indicate your current weight and the weight you are aiming for.</p>
+<div class="content center">
+<div class="title">Your goal weight</div>
+<div class="text">Please indicate your current weight and the weight you are aiming for.</div>
+</div>
 
-<p class="bold">Current weight (Kg):</p>
+<label>Current weight (Kg):</label>
 <input type="number" id="currentWeight">
 
-<p class="bold">Goal weight (Kg):</p>
+<label>Goal weight (Kg):</label>
 <input type="number" id="goalWeight">
 
 <div class="footer">
@@ -427,20 +434,24 @@ background:#26263a;
 <!-- SCREEN 9 -->
 <div class="screen" data-step="9">
 <div class="loader-wrapper">
-<h1>Analyzing</h1>
-<p>Let us analyze your data and calculate the results</p>
+<div class="title">Analyzing</div>
+<div class="text">Let us analyze your data and calculate the results</div>
 <div class="loader">•••</div>
 </div>
 </div>
 
 <!-- SCREEN 10 -->
 <div class="screen" data-step="10">
-<h1 class="center">Chose your plan!</h1>
-<p class="center">Auto-renews. Cancel anytime.</p>
+<div class="content center">
+<div class="title">Chose your plan!</div>
+<div class="text">Auto-renews. Cancel anytime.</div>
+</div>
 
+<div style="margin-top:28px;">
 <div class="option select">Monthly – $19.99</div>
 <div class="option select best">3 Months – $39.99 (Best Value)</div>
 <div class="option select">Annual – $79.99</div>
+</div>
 
 <div class="footer">
 <button class="primary" id="restart">Unlock My Plan</button>
@@ -499,8 +510,7 @@ function checkWeight(){
 let c=document.getElementById('currentWeight').value;
 let g=document.getElementById('goalWeight').value;
 let btn=document.querySelector('[data-step="8"] .next');
-if(c && g) btn.disabled=false;
-else btn.disabled=true;
+btn.disabled = !(c && g);
 }
 
 document.getElementById('restart').addEventListener('click',()=>{
