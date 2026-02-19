@@ -2,34 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Everdance Quiz</title>
-<link rel="stylesheet" href="style.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
 
 <header class="header">
-  <img src="logotype.svg" class="logo">
+  <img src="logotype.svg" class="logo" alt="Everdance">
   <div class="progress">
     <div class="progress-bar"></div>
   </div>
 </header>
 
-<main class="screens">
+<main class="quiz">
 
 <!-- SCREEN 1 -->
 <section class="screen active bg-screen" data-step="1">
-  <div class="bg-image" style="background-image:url('chair.jpg')"></div>
+  <div class="bg" style="background-image:url('chair.jpg')"></div>
   <div class="content center">
-    <p class="subtitle">Get fit with</p>
-    <h1 class="hero-title">CHAIR DANCE</h1>
-    <p class="text">
+
+    <p class="pretitle">Get fit with</p>
+    <h1 class="hero">CHAIR DANCE</h1>
+
+    <p class="description">
       An easy, effective chair dance plan designed for real results at any level
     </p>
-    <p class="bold-label">Select your your main goal:</p>
+
+    <p class="label">Select your your main goal:</p>
 
     <div class="options">
       <button class="option">🍕 Fat burning</button>
@@ -37,6 +41,7 @@
       <button class="option">🔥 Increased testosterone</button>
       <button class="option">⚖️ All of the above</button>
     </div>
+
   </div>
 </section>
 
@@ -44,15 +49,16 @@
 <section class="screen" data-step="2">
   <div class="content">
     <h2>What is your age?</h2>
-    <p class="text">Our plan adapts to your age</p>
+    <p class="description center">Our plan adapts to your age</p>
 
-    <div class="image-grid">
-      <div class="image-option"><img src="18-35.jpg"><span>18-35</span></div>
-      <div class="image-option"><img src="36-45.jpg"><span>36-45</span></div>
-      <div class="image-option"><img src="46-55.jpg"><span>46-55</span></div>
-      <div class="image-option"><img src="56.jpg"><span>56+</span></div>
+    <div class="grid">
+      <div class="img-option"><img src="18-35.jpg"><span>18-35</span></div>
+      <div class="img-option"><img src="36-45.jpg"><span>36-45</span></div>
+      <div class="img-option"><img src="46-55.jpg"><span>46-55</span></div>
+      <div class="img-option"><img src="56.jpg"><span>56+</span></div>
     </div>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue" disabled>Continue</button>
@@ -61,15 +67,16 @@
 
 <!-- SCREEN 3 -->
 <section class="screen bg-screen" data-step="3">
-  <div class="bg-image" style="background-image:url('man.jpg')"></div>
+  <div class="bg" style="background-image:url('man.jpg')"></div>
   <div class="content center">
-    <p class="subtitle">The solution</p>
-    <h1 class="hero-title">RIGHT HERE!</h1>
-    <p class="text">
+    <p class="pretitle">The solution</p>
+    <h1 class="hero">RIGHT HERE!</h1>
+    <p class="description">
       Most men never reach their full potential. Not because they lack talent —
       but because they lack structure. Train with us and your results may surprise you.
     </p>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue">Continue</button>
@@ -86,6 +93,7 @@
       <button class="option">🪫 Low energy & inconsistent</button>
     </div>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue" disabled>Continue</button>
@@ -96,13 +104,15 @@
 <section class="screen" data-step="5">
   <div class="content">
     <h2>What is your body shape?</h2>
-    <div class="image-grid">
-      <div class="image-option"><img src="Rectangle.jpg"><span>Rectangle</span></div>
-      <div class="image-option"><img src="Triangle.jpg"><span>Triangle</span></div>
-      <div class="image-option"><img src="Rounded.jpg"><span>Rounded</span></div>
-      <div class="image-option"><img src="Trapezoid.jpg"><span>Trapezoid</span></div>
+
+    <div class="grid">
+      <div class="img-option"><img src="Rectangle.jpg"><span>Rectangle</span></div>
+      <div class="img-option"><img src="Triangle.jpg"><span>Triangle</span></div>
+      <div class="img-option"><img src="Rounded.jpg"><span>Rounded</span></div>
+      <div class="img-option"><img src="Trapezoid.jpg"><span>Trapezoid</span></div>
     </div>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue" disabled>Continue</button>
@@ -119,6 +129,7 @@
       <button class="option">😒 No, I want to improve</button>
     </div>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue" disabled>Continue</button>
@@ -127,15 +138,16 @@
 
 <!-- SCREEN 7 -->
 <section class="screen bg-screen" data-step="7">
-  <div class="bg-image" style="background-image:url('group.jpg')"></div>
+  <div class="bg" style="background-image:url('group.jpg')"></div>
   <div class="content center">
-    <h1 class="hero-title">1 MLN PEOPLE</h1>
-    <p class="subtitle">Have chosen everdance</p>
-    <p class="text">
+    <h1 class="hero">1 MLN PEOPLE</h1>
+    <p class="pretitle">Have chosen everdance</p>
+    <p class="description">
       Become part of our large community and move towards your goals step by step.
       The road emerges beneath the feet of those who walk.
     </p>
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue">Continue</button>
@@ -146,16 +158,18 @@
 <section class="screen" data-step="8">
   <div class="content">
     <h2>Your goal weight</h2>
-    <p class="text">
+
+    <p class="description">
       Please indicate your current weight and the weight you are aiming for.
     </p>
 
     <label>Current weight (Kg):</label>
-    <input type="number" class="input-field">
+    <input type="number" class="input">
 
     <label>Goal weight (Kg):</label>
-    <input type="number" class="input-field">
+    <input type="number" class="input">
   </div>
+
   <div class="nav">
     <button class="btn secondary back">Back</button>
     <button class="btn primary continue" disabled>Continue</button>
@@ -166,7 +180,7 @@
 <section class="screen center" data-step="9">
   <div class="content center">
     <h2>Analyzing</h2>
-    <p class="text">Let us analyze your data and calculate the results</p>
+    <p class="description">Let us analyze your data and calculate the results</p>
     <div class="loader"></div>
   </div>
 </section>
@@ -175,7 +189,7 @@
 <section class="screen" data-step="10">
   <div class="content">
     <h2>Chose your plan!</h2>
-    <p class="text">Auto-renews. Cancel anytime.</p>
+    <p class="description center">Auto-renews. Cancel anytime.</p>
 
     <div class="options">
       <button class="option">Monthly – $19.99</button>
@@ -183,8 +197,9 @@
       <button class="option">Annual – $79.99</button>
     </div>
   </div>
+
   <div class="nav">
-    <button class="btn secondary restart">Contact us</button>
+    <button class="btn secondary">Contact us</button>
     <button class="btn primary restart">Unlock My Plan</button>
   </div>
 </section>
