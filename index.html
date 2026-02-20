@@ -103,7 +103,6 @@ padding-top:28px;
 
 .first-footer{
 margin-top:8px; /* 28px от текста */
-gap:8px;         /* ровно 8px между кнопками */
 position:static; /* не закрепляется */
 }
 
@@ -156,6 +155,8 @@ align-items:center;
 gap:12px;
 font-size:15px;
 }
+
+.option + .option{ margin-top:8px; /* 8px как ты просил */ }
 
 .option.active{
 border-color:var(--accent);
